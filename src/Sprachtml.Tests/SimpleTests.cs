@@ -121,5 +121,18 @@ namespace Sprachtml.Tests
 
 
         }
+
+       /*
+        * TODO
+        * Comments
+        * Attributes without quotes
+        * Doc types
+        * Script tags
+        * Style tags
+        * 
+        * 
+        * Different cases?
+        * 
+        */
     }
 }

@@ -46,8 +46,14 @@
   <ItemGroup>
     <Compile Include="Extensions\EnumerableCharExtensions.cs" />
     <Compile Include="Extensions\IHtmlNodeExtensions.cs" />
+    <Compile Include="Models\HtmlAttribute.cs" />
     <Compile Include="Models\HtmlNode.cs" />
     <Compile Include="Models\HtmlNodeType.cs" />
+    <Compile Include="Models\IHtmlNode.cs" />
+    <Compile Include="Models\QuotedString.cs" />
+    <Compile Include="Models\QuoteType.cs" />
+    <Compile Include="Models\TagIdentifier.cs" />
+    <Compile Include="Models\TextNode.cs" />
     <Compile Include="Parsers\SprachtmlParsers.cs" />
     <Compile Include="Sprachtml.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
