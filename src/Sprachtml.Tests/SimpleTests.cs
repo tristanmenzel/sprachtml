@@ -18,7 +18,7 @@ namespace Sprachtml.Tests
         {
             var html = "<div></div>";
 
-            var parsed = Sprachtml.Parse(html);
+            var parsed = SprachtmlParser.Parse(html);
 
             parsed.Length.ShouldBe(1);
 
@@ -32,7 +32,7 @@ namespace Sprachtml.Tests
         {
             var html = "<div><span></span></div>";
 
-            var parsed = Sprachtml.Parse(html);
+            var parsed = SprachtmlParser.Parse(html);
 
             parsed.Length.ShouldBe(1);
 
@@ -44,11 +44,26 @@ namespace Sprachtml.Tests
         }
 
         [Test]
+        public void GivenHtmlWithNewLinesInIt_Should_ParseWithoutIssue()
+        {
+            var html = @"
+                        <div>
+                        </div>
+                        ";
+
+            var parsed = SprachtmlParser.Parse(html);
+
+            parsed.Length.ShouldBe(3);
+
+            parsed[1].NodeType.ShouldBe(HtmlNodeType.Div);
+        }
+
+        [Test]
         public void GivenDivWithIdMarkup_Should_ParseToDivWithIdAttribute()
         {
             var html = "<div id=\"TestId\"></div>";
 
-            var parsed = Sprachtml.Parse(html);
+            var parsed = SprachtmlParser.Parse(html);
 
             parsed.Length.ShouldBe(1);
 
@@ -67,7 +82,7 @@ namespace Sprachtml.Tests
         {
             var html = "<textarea readonly></textarea>";
 
-            var parsed = Sprachtml.Parse(html);
+            var parsed = SprachtmlParser.Parse(html);
 
             parsed.Length.ShouldBe(1);
             parsed[0].NodeType.ShouldBe(HtmlNodeType.Textarea);
@@ -80,7 +95,7 @@ namespace Sprachtml.Tests
         {
             var html = "<br />";
 
-            var parsed = Sprachtml.Parse(html);
+            var parsed = SprachtmlParser.Parse(html);
 
             parsed.Length.ShouldBe(1);
             parsed[0].Children.ShouldBeEmpty();
@@ -91,7 +106,7 @@ namespace Sprachtml.Tests
         {
             var html = "I am text with no html";
 
-            var parsed = Sprachtml.Parse(html);
+            var parsed = SprachtmlParser.Parse(html);
 
             parsed.Length.ShouldBe(1);
             parsed[0].Children.ShouldBeEmpty();
@@ -104,7 +119,7 @@ namespace Sprachtml.Tests
         {
             var html = "<p>This is a paragraph with <strong>strong</strong> content</p>";
 
-            var parsed = Sprachtml.Parse(html);
+            var parsed = SprachtmlParser.Parse(html);
 
             parsed.Length.ShouldBe(1);
 
@@ -127,7 +142,7 @@ namespace Sprachtml.Tests
         {
             var html = "<!-- test -->";
 
-            var parsed = Sprachtml.Parse(html);
+            var parsed = SprachtmlParser.Parse(html);
 
             parsed.Length.ShouldBe(1);
 
@@ -140,7 +155,7 @@ namespace Sprachtml.Tests
         {
             var html = "<!-- <strong>Test</strong> <br /> -->";
 
-            var parsed = Sprachtml.Parse(html);
+            var parsed = SprachtmlParser.Parse(html);
 
             parsed.Length.ShouldBe(1);
 
@@ -152,7 +167,7 @@ namespace Sprachtml.Tests
         {
             var html = "<input type=text value=test />";
 
-            var parsed = Sprachtml.Parse(html);
+            var parsed = SprachtmlParser.Parse(html);
 
             parsed.Length.ShouldBe(1);
 
@@ -175,7 +190,7 @@ namespace Sprachtml.Tests
         {
             var html = "<script></script>";
 
-            var parsed = Sprachtml.Parse(html);
+            var parsed = SprachtmlParser.Parse(html);
 
             parsed.Length.ShouldBe(1);
 
@@ -188,7 +203,7 @@ namespace Sprachtml.Tests
         {
             var html = "<script>Four</script>";
 
-            var parsed = Sprachtml.Parse(html);
+            var parsed = SprachtmlParser.Parse(html);
 
             parsed.Length.ShouldBe(1);
 
@@ -203,7 +218,7 @@ namespace Sprachtml.Tests
             var contents = "<h1>I might not be valid javascript, but I am valid html</h1>";
             var html = $"<script>{contents}</script>";
 
-            var parsed = Sprachtml.Parse(html);
+            var parsed = SprachtmlParser.Parse(html);
 
             parsed.Length.ShouldBe(1);
 
@@ -217,7 +232,7 @@ namespace Sprachtml.Tests
             var contents = "<h1>I might not be valid javascript, but I am valid html</h1>";
             var html = $"{contents}<script></script>";
 
-            var parsed = Sprachtml.Parse(html);
+            var parsed = SprachtmlParser.Parse(html);
 
             parsed.Length.ShouldBe(2);
 
@@ -234,7 +249,7 @@ namespace Sprachtml.Tests
         {
             var html = "<style></style>";
 
-            var parsed = Sprachtml.Parse(html);
+            var parsed = SprachtmlParser.Parse(html);
 
             parsed.Length.ShouldBe(1);
 

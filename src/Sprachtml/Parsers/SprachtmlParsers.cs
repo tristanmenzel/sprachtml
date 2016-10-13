@@ -55,39 +55,34 @@ namespace Sprachtml.Parsers
             select new TextNode(t.AsString());
 
         public static Parser<IHtmlNode> ScriptTag =>
-            from leadingWs in Parse.WhiteSpace.Many()
-            from scriptOpen in Parse.String("<script").Once()
+            from scriptOpen in Parse.IgnoreCase("<script").Once()
             from attributes in AttributeParser.Many()
             from openGt in Parse.Char('>')
-            from contents in Parse.AnyChar.Except(Parse.String("</script>")).Many()
-            from close in Parse.String("</script>").Once()
+            from contents in Parse.AnyChar.Except(Parse.IgnoreCase("</script>")).Many()
+            from close in Parse.IgnoreCase("</script>").Once()
             select new ScriptNode(contents.AsString(), attributes.ToArray());
 
         public static Parser<IHtmlNode> StyleTag =>
-            from leadingWs in Parse.WhiteSpace.Many()
-            from scriptOpen in Parse.String("<style").Once()
+            from scriptOpen in Parse.IgnoreCase("<style").Once()
             from attributes in AttributeParser.Many()
             from openGt in Parse.Char('>')
-            from contents in Parse.AnyChar.Except(Parse.String("</style>")).Many()
-            from close in Parse.String("</style>").Once()
+            from contents in Parse.AnyChar.Except(Parse.IgnoreCase("</style>")).Many()
+            from close in Parse.IgnoreCase("</style>").Once()
             select new StyleNode(contents.AsString(), attributes.ToArray());
 
         public static Parser<IHtmlNode> HtmlTag =>
-            from leadingWs in Parse.WhiteSpace.Many()
             from openLt in Parse.Char('<')
             from tagName in TagNameParser
             from attributes in AttributeParser.Many()
-            from ws1 in Parse.WhiteSpace.Many()
-            from openGt in Parse.Char('>')
-            from children in SelfClosingHtmlTag.Or(HtmlTag).Or(TextNode).Many()
+            from openGt in Parse.Char('>').Token()
+            from children in HtmlChildParser
             from closeLt in Parse.Char('<')
             from slash in Parse.Char('/')
-            from closeTagName in Parse.String(tagName.Value)
+            from closeTagName in Parse.IgnoreCase(tagName.Value)
             from closeGt in Parse.Char('>')
             select new HtmlNode(tagName.NodeType, attributes.ToArray(), children.ToArray());
 
         public static Parser<IHtmlNode> SelfClosingHtmlTag =>
-            from leadingWs in Parse.WhiteSpace.Many()
             from openLt in Parse.Char('<')
             from tagName in TagNameParser
             from attributes in AttributeParser.Many()
@@ -95,6 +90,27 @@ namespace Sprachtml.Parsers
             from selfClosingSlash in Parse.Char('/')
             from openGt in Parse.Char('>')
             select new HtmlNode(tagName.NodeType, attributes.ToArray(), new IHtmlNode[0]);
+
+        //public static Parser<IHtmlNode> WhiteSpace =>
+        //    from whiteSpace in Parse.WhiteSpace.AtLeastOnce()
+        //    select new WhiteSpace(whiteSpace.AsString());
+
+        //private static Parser<IHtmlNode> EverythingButWhiteSpaceAndText =>
+        //    Comment
+        //        .Or(ScriptTag)
+        //        .Or(StyleTag)
+        //        .Or(SelfClosingHtmlTag)
+        //        .Or(HtmlTag);
+
+        private static Parser<IEnumerable<IHtmlNode>> HtmlChildParser =>
+            Comment
+                .Or(ScriptTag)
+                .Or(StyleTag)
+                .Or(SelfClosingHtmlTag)
+                .Or(HtmlTag)
+                .Or(TextNode)
+                .Many();
+
 
         public static Parser<IEnumerable<IHtmlNode>> HtmlParser =>
             Comment
