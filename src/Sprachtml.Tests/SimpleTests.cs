@@ -96,7 +96,7 @@ namespace Sprachtml.Tests
             parsed.Length.ShouldBe(1);
             parsed[0].Children.ShouldBeEmpty();
             parsed[0].NodeType.ShouldBe(HtmlNodeType.Text);
-            ((TextNode)parsed[0]).Contents.ShouldBe("I am text with no html");
+            parsed[0].Contents.ShouldBe("I am text with no html");
 
         }
         [Test]
