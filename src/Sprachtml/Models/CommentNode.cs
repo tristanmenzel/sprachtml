@@ -1,15 +1,15 @@
 namespace Sprachtml.Models
 {
-    public class TextNode : IHtmlNode
+    public class CommentNode : IHtmlNode
     {
         public string Contents { get; }
 
-        public TextNode(string contents)
+        public CommentNode(string contents)
         {
             Contents = contents;
         }
 
-        public HtmlNodeType NodeType => HtmlNodeType.Text;
+        public HtmlNodeType NodeType => HtmlNodeType.Comment;
         IHtmlNode[] IHtmlNode.Children => new IHtmlNode[0];
         HtmlAttribute[] IHtmlNode.Attributes => new HtmlAttribute[0];
     }

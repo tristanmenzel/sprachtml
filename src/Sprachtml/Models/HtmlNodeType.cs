@@ -4,9 +4,16 @@ namespace Sprachtml.Models
     {
         Custom,
         Text,
-        Comment, // TODO
-        Script, // TODO
-        Style, // TODO
+        Comment,
+        Script,
+        Style, 
+
+        Html,
+        Head,
+        Body,
+        Title,
+        Meta,
+
 
         H1,
         H2,

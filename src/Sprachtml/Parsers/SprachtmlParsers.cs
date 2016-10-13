@@ -8,6 +8,9 @@ namespace Sprachtml.Parsers
 {
     public static class SprachtmlParsers
     {
+        public static Parser<IHtmlNode> Comment =>
+            from comment in new CommentParser("<!--", "-->").AnyComment
+            select new CommentNode(comment);
 
         public static Parser<char> LetterDigitOrHyphen = Parse.LetterOrDigit.Or(Parse.Char('-'));
 
@@ -21,33 +24,53 @@ namespace Sprachtml.Parsers
             from c in Parse.Char('\'').Once()
             select new QuotedString(QuoteType.Single, any.AsString())
             );
-        public static Parser<QuotedString> DoubleQuotedString => (
-        from o in Parse.Char('\"').Once()
-        from any in Parse.CharExcept('\"').Many()
-        from c in Parse.Char('\"').Once()
-        select new QuotedString(QuoteType.Double, any.AsString())
-        );
+        public static Parser<QuotedString> DoubleQuotedString =>
+            from o in Parse.Char('\"').Once()
+            from any in Parse.CharExcept('\"').Many()
+            from c in Parse.Char('\"').Once()
+            select new QuotedString(QuoteType.Double, any.AsString());
 
-        public static Parser<QuotedString> QuotedString => SingleQuotedString.Or(DoubleQuotedString);
+        public static Parser<QuotedString> UnquotedString =>
+            from val in Parse.LetterOrDigit.AtLeastOnce()
+            select new QuotedString(QuoteType.None, val.AsString());
 
-        public static Parser<QuotedString> AttributeValue => 
+        public static Parser<QuotedString> QuotedString => SingleQuotedString.Or(DoubleQuotedString).Or(UnquotedString);
+
+        public static Parser<QuotedString> AttributeValue =>
             from ws1 in Parse.WhiteSpace.Many()
             from eq in Parse.Char('=').Once()
             from ws2 in Parse.WhiteSpace.Many()
             from value in QuotedString.Once()
             select value.Single();
 
-        public static Parser<HtmlAttribute> AttributeParser => 
+        public static Parser<HtmlAttribute> AttributeParser =>
             from leadingWhiteSpace in Parse.WhiteSpace.AtLeastOnce()
             from identifier in LetterDigitOrHyphen.AtLeastOnce()
             from attrValue in AttributeValue.Optional()
             select new HtmlAttribute(identifier.AsString(), attrValue);
 
 
-        public static Parser<IHtmlNode> TextNode => 
-		    from t in Parse.CharExcept('<').AtLeastOnce()
-		    select new TextNode(t.AsString());
+        public static Parser<IHtmlNode> TextNode =>
+            from t in Parse.CharExcept('<').AtLeastOnce()
+            select new TextNode(t.AsString());
 
+        public static Parser<IHtmlNode> ScriptTag =>
+            from leadingWs in Parse.WhiteSpace.Many()
+            from scriptOpen in Parse.String("<script").Once()
+            from attributes in AttributeParser.Many()
+            from openGt in Parse.Char('>')
+            from contents in Parse.AnyChar.Except(Parse.String("</script>")).Many()
+            from close in Parse.String("</script>").Once()
+            select new ScriptNode(contents.AsString(), attributes.ToArray());
+
+        public static Parser<IHtmlNode> StyleTag =>
+            from leadingWs in Parse.WhiteSpace.Many()
+            from scriptOpen in Parse.String("<style").Once()
+            from attributes in AttributeParser.Many()
+            from openGt in Parse.Char('>')
+            from contents in Parse.AnyChar.Except(Parse.String("</style>")).Many()
+            from close in Parse.String("</style>").Once()
+            select new StyleNode(contents.AsString(), attributes.ToArray());
 
         public static Parser<IHtmlNode> HtmlTag =>
             from leadingWs in Parse.WhiteSpace.Many()
@@ -74,7 +97,10 @@ namespace Sprachtml.Parsers
             select new HtmlNode(tagName.NodeType, attributes.ToArray(), new IHtmlNode[0]);
 
         public static Parser<IEnumerable<IHtmlNode>> HtmlParser =>
-            SelfClosingHtmlTag
+            Comment
+                .Or(ScriptTag)
+                .Or(StyleTag)
+                .Or(SelfClosingHtmlTag)
                 .Or(HtmlTag)
                 .Or(TextNode)
                 .Many()

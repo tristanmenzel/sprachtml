@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Sprachtml.Models
+﻿namespace Sprachtml.Models
 {
     public class HtmlNode : IHtmlNode
     {
@@ -13,8 +11,7 @@ namespace Sprachtml.Models
 
         public HtmlNodeType NodeType { get; }
         public HtmlAttribute[] Attributes { get; }
+        string IHtmlNode.Contents => null;
         public IHtmlNode[] Children { get; }
-
-
     }
 }

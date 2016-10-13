@@ -5,7 +5,6 @@ namespace Sprachtml.Models
         HtmlNodeType NodeType { get; }
         IHtmlNode[] Children { get; }
         HtmlAttribute[] Attributes { get; }
-
-        
+        string Contents { get; }
     }
 }
