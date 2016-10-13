@@ -1,8 +1,11 @@
+using Sprache;
+
 namespace Sprachtml.Models
 {
     public class StyleNode : IHtmlNode
     {
         public string Contents { get; }
+        public Position NodeLocation { get; set; }
 
         public StyleNode(string contents, HtmlAttribute[] attributes)
         {

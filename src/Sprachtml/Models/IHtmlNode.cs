@@ -1,3 +1,5 @@
+using Sprache;
+
 namespace Sprachtml.Models
 {
     public interface IHtmlNode
@@ -6,5 +8,7 @@ namespace Sprachtml.Models
         IHtmlNode[] Children { get; }
         HtmlAttribute[] Attributes { get; }
         string Contents { get; }
+
+        Position NodeLocation { get; set; }
     }
 }

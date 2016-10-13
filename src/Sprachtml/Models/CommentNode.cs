@@ -1,8 +1,11 @@
+using Sprache;
+
 namespace Sprachtml.Models
 {
     public class CommentNode : IHtmlNode
     {
         public string Contents { get; }
+        public Position NodeLocation { get; set; }
 
         public CommentNode(string contents)
         {

@@ -57,7 +57,6 @@
     <Compile Include="Models\StyleNode.cs" />
     <Compile Include="Models\TagIdentifier.cs" />
     <Compile Include="Models\TextNode.cs" />
-    <Compile Include="Models\WhiteSpace.cs" />
     <Compile Include="Parsers\SprachtmlParsers.cs" />
     <Compile Include="SprachtmlParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

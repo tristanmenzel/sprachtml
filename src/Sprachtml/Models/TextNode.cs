@@ -1,8 +1,11 @@
+using Sprache;
+
 namespace Sprachtml.Models
 {
     public class TextNode : IHtmlNode
     {
         public string Contents { get; }
+        public Position NodeLocation { get; set; }
 
         public TextNode(string contents)
         {

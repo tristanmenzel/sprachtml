@@ -91,16 +91,17 @@ namespace Sprachtml.Parsers
             from openGt in Parse.Char('>')
             select new HtmlNode(tagName.NodeType, attributes.ToArray(), new IHtmlNode[0]);
 
-        //public static Parser<IHtmlNode> WhiteSpace =>
-        //    from whiteSpace in Parse.WhiteSpace.AtLeastOnce()
-        //    select new WhiteSpace(whiteSpace.AsString());
+        private static Parser<T> WithPosition<T>(this Parser<T> parser) where T : IHtmlNode
+        {
+            return i =>
+            {
+                var r = parser(i);
+                if (r.WasSuccessful)
+                    r.Value.NodeLocation = new Position(i.Position, i.Line, i.Column);
 
-        //private static Parser<IHtmlNode> EverythingButWhiteSpaceAndText =>
-        //    Comment
-        //        .Or(ScriptTag)
-        //        .Or(StyleTag)
-        //        .Or(SelfClosingHtmlTag)
-        //        .Or(HtmlTag);
+                return r;
+            };
+        }
 
         private static Parser<IEnumerable<IHtmlNode>> HtmlChildParser =>
             Comment
@@ -109,6 +110,7 @@ namespace Sprachtml.Parsers
                 .Or(SelfClosingHtmlTag)
                 .Or(HtmlTag)
                 .Or(TextNode)
+                .WithPosition()
                 .Many();
 
 
@@ -119,6 +121,7 @@ namespace Sprachtml.Parsers
                 .Or(SelfClosingHtmlTag)
                 .Or(HtmlTag)
                 .Or(TextNode)
+                .WithPosition()
                 .Many()
                 .End();
     }
