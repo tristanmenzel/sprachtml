@@ -51,8 +51,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SimpleTests.cs" />
+    <Compile Include="Attributes\BinaryAttributes.cs" />
+    <Compile Include="Attributes\GivenDivWithIdMarkup.cs" />
+    <Compile Include="Attributes\UnquotedAttributesWithNoSpaces.cs" />
+    <Compile Include="GenericTags\GivenDivMarkup.cs" />
+    <Compile Include="GenericTags\GivenHtmlWithNewLinesInIt.cs" />
+    <Compile Include="GenericTags\GivenSpanInsideDivMarkup.cs" />
+    <Compile Include="ParsingTestBase.cs" />
+    <Compile Include="Comments\HtmlInComment.cs" />
+    <Compile Include="Comments\SimpleComment.cs" />
+    <Compile Include="ScriptTags\EmptyScriptTag.cs" />
+    <Compile Include="ScriptTags\HtmlInScriptTagThatIsNotCloseScript.cs" />
+    <Compile Include="ScriptTags\NonEmptyScriptTag.cs" />
+    <Compile Include="ScriptTags\RegularHtmlAndScriptTags.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SelfClosingTags\SelfClosingTags.cs" />
+    <Compile Include="StyleTags\EmptyStyleTag.cs" />
+    <Compile Include="Text\PlainText.cs" />
+    <Compile Include="Text\TextWithHtml.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
