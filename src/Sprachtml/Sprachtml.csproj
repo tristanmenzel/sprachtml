@@ -59,6 +59,7 @@
     <Compile Include="Models\TagIdentifier.cs" />
     <Compile Include="Models\TextNode.cs" />
     <Compile Include="Parsers\SprachtmlParsers.cs" />
+    <Compile Include="Parsers\Tracer.cs" />
     <Compile Include="SprachtmlParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

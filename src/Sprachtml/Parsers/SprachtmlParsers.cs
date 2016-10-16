@@ -14,16 +14,16 @@ namespace Sprachtml.Parsers
 
         public static Parser<char> LetterDigitOrHyphen = Parse.LetterOrDigit.Or(Parse.Char('-'));
 
-        public static Parser<TagIdentifier> TagNameParser => (
+        public static Parser<TagIdentifier> TagNameParser => 
             from identifier in LetterDigitOrHyphen.AtLeastOnce()
-            select new TagIdentifier(identifier.AsString()));
+            select new TagIdentifier(identifier.AsString());
 
-        public static Parser<QuotedString> SingleQuotedString => (
+        public static Parser<QuotedString> SingleQuotedString => 
             from o in Parse.Char('\'').Once()
             from any in Parse.CharExcept('\'').Many()
             from c in Parse.Char('\'').Once()
-            select new QuotedString(QuoteType.Single, any.AsString())
-            );
+            select new QuotedString(QuoteType.Single, any.AsString());
+
         public static Parser<QuotedString> DoubleQuotedString =>
             from o in Parse.Char('\"').Once()
             from any in Parse.CharExcept('\"').Many()
@@ -75,11 +75,13 @@ namespace Sprachtml.Parsers
             from tagName in TagNameParser
             from attributes in AttributeParser.Many()
             from openGt in Parse.Char('>').Token()
+            from t1 in Tracer.Instance.Push(tagName.Value)
             from children in HtmlChildParser
             from closeLt in Parse.Char('<')
             from slash in Parse.Char('/')
             from closeTagName in Parse.IgnoreCase(tagName.Value)
             from closeGt in Parse.Char('>')
+            from t2 in Tracer.Instance.Pop()
             select new HtmlNode(tagName.NodeType, tagName.Value, attributes.ToArray(), children.ToArray());
 
         public static Parser<IHtmlNode> SelfClosingHtmlTag =>

@@ -13,11 +13,12 @@ namespace Sprachtml
         {
             try
             {
+                Tracer.Instance = new Tracer();
                 return SprachtmlParsers.HtmlParser.Parse(html).ToArray();
             }
             catch (ParseException parseException)
             {
-                throw new SprachtmlParseException("Exception parsing html", parseException);
+                throw new SprachtmlParseException($"Incomplete tag at `{string.Join(" > ", Tracer.Instance.Nodes.Reverse())}`", parseException);
             }
         }
     }
