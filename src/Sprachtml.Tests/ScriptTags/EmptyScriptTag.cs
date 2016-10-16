@@ -6,7 +6,6 @@ namespace Sprachtml.Tests.ScriptTags
 {
     public class EmptyScriptTag : ParsingTestBase
     {
-
         protected override string Markup => "<script></script>";
 
         [Test]

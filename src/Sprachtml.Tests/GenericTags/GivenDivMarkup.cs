@@ -7,7 +7,7 @@ namespace Sprachtml.Tests.GenericTags
     public class GivenDivMarkup : ParsingTestBase
     {
         [Test]
-        public void GivenDivMarkup_Should_ParseToDiv()
+        public void ShouldParseToDiv()
         {
             var parsed = GetNodes();
 

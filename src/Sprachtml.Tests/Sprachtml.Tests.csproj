@@ -54,9 +54,12 @@
     <Compile Include="Attributes\BinaryAttributes.cs" />
     <Compile Include="Attributes\GivenDivWithIdMarkup.cs" />
     <Compile Include="Attributes\UnquotedAttributesWithNoSpaces.cs" />
+    <Compile Include="CustomElements\CustomElements.cs" />
+    <Compile Include="Errors\MalformedHtml.cs" />
     <Compile Include="GenericTags\GivenDivMarkup.cs" />
     <Compile Include="GenericTags\GivenHtmlWithNewLinesInIt.cs" />
     <Compile Include="GenericTags\GivenSpanInsideDivMarkup.cs" />
+    <Compile Include="GenericTags\TagsWithDifferentCasing.cs" />
     <Compile Include="ParsingTestBase.cs" />
     <Compile Include="Comments\HtmlInComment.cs" />
     <Compile Include="Comments\SimpleComment.cs" />

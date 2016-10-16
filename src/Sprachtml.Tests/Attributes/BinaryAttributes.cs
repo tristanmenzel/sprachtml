@@ -4,7 +4,6 @@ using Sprachtml.Models;
 
 namespace Sprachtml.Tests.Attributes
 {
-    [TestFixture]
     public class BinaryAttributes : ParsingTestBase
     {
         [Test]

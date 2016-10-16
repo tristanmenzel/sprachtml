@@ -4,7 +4,7 @@ using Sprachtml.Models;
 
 namespace Sprachtml.Tests.StyleTags
 {
-    public class EmptyStyleTag:ParsingTestBase
+    public class EmptyStyleTag : ParsingTestBase
     {
         [Test]
         public void ShouldParseAsStyleTagWithNoContents()

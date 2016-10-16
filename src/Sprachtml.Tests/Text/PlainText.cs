@@ -4,7 +4,6 @@ using Sprachtml.Models;
 
 namespace Sprachtml.Tests.Text
 {
-    [TestFixture]
     public class PlainText : ParsingTestBase
     {
         [Test]

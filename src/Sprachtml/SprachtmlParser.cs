@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Sprache;
+using Sprachtml.Exceptions;
 using Sprachtml.Models;
 using Sprachtml.Parsers;
 
@@ -9,7 +11,14 @@ namespace Sprachtml
     {
         public static IHtmlNode[] Parse(string html)
         {
-            return SprachtmlParsers.HtmlParser.Parse(html).ToArray();
+            try
+            {
+                return SprachtmlParsers.HtmlParser.Parse(html).ToArray();
+            }
+            catch (ParseException parseException)
+            {
+                throw new SprachtmlParseException("Exception parsing html", parseException);
+            }
         }
     }
 }

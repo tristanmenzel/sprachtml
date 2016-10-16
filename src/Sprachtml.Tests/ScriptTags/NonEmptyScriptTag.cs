@@ -6,8 +6,8 @@ namespace Sprachtml.Tests.ScriptTags
 {
     public class NonEmptyScriptTag : ParsingTestBase
     {
-
         protected override string Markup => "<script>Four</script>";
+
         [Test]
         public void ShouldParseAsScriptTagWithContents()
         {

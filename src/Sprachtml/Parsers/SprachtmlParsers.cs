@@ -80,7 +80,7 @@ namespace Sprachtml.Parsers
             from slash in Parse.Char('/')
             from closeTagName in Parse.IgnoreCase(tagName.Value)
             from closeGt in Parse.Char('>')
-            select new HtmlNode(tagName.NodeType, attributes.ToArray(), children.ToArray());
+            select new HtmlNode(tagName.NodeType, tagName.Value, attributes.ToArray(), children.ToArray());
 
         public static Parser<IHtmlNode> SelfClosingHtmlTag =>
             from openLt in Parse.Char('<')
@@ -89,7 +89,7 @@ namespace Sprachtml.Parsers
             from ws1 in Parse.WhiteSpace.Many()
             from selfClosingSlash in Parse.Char('/')
             from openGt in Parse.Char('>')
-            select new HtmlNode(tagName.NodeType, attributes.ToArray(), new IHtmlNode[0]);
+            select new HtmlNode(tagName.NodeType, tagName.Value, attributes.ToArray(), new IHtmlNode[0]);
 
         private static Parser<T> WithPosition<T>(this Parser<T> parser) where T : IHtmlNode
         {

@@ -4,10 +4,10 @@ using Sprachtml.Models;
 
 namespace Sprachtml.Tests.GenericTags
 {
-    public class GivenSpanInsideDivMarkup : ParsingTestBase
+    public class TagsWithDifferentCasing : ParsingTestBase
     {
         [Test]
-        public void ShouldParseToDivWithChildOfSpan()
+        public void ShouldParseAsOneElement()
         {
             var parsed = GetNodes();
 
@@ -15,11 +15,10 @@ namespace Sprachtml.Tests.GenericTags
 
             parsed[0].NodeType.ShouldBe(HtmlNodeType.Div);
             parsed[0].Children.Length.ShouldBe(1);
-
             parsed[0].Children[0].NodeType.ShouldBe(HtmlNodeType.Span);
-            parsed[0].Children[0].Children.ShouldBeEmpty();
         }
 
-        protected override string Markup => "<div><span></span></div>";
+        protected override string Markup => "<div><sPan></spaN></DIV>";
+
     }
 }

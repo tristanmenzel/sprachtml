@@ -11,7 +11,7 @@ namespace Sprachtml.Tests.ScriptTags
         protected override string Markup => $"{Contents}<script></script>";
 
         [Test]
-        public void CoexistPeacefully()
+        public void ShouldCoexistPeacefully()
         {
             var parsed = GetNodes();
 

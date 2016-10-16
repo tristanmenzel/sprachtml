@@ -5,7 +5,6 @@ using Sprachtml.Models;
 
 namespace Sprachtml.Tests.Text
 {
-    [TestFixture]
     public class TextWithHtml : ParsingTestBase
     {
         protected override string Markup => "<p>This is a paragraph with <strong>strong</strong> content</p>";
