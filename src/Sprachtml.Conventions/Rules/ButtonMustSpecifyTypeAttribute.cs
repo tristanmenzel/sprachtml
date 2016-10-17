@@ -8,13 +8,13 @@ namespace Sprachtml.Conventions.Rules
 {
     public interface IConventionRule
     {
-        ConventionResult Test(ICollection<IHtmlNode> nodes);
+        RuleResult Test(ICollection<IHtmlNode> nodes);
     }
 
-    public class ConventionResult
+    public class RuleResult
     {
 
-        public ConventionResult(bool passed, string message = null, IHtmlNode[] offendingNodes = null)
+        public RuleResult(bool passed, string message = null, IHtmlNode[] offendingNodes = null)
         {
             OffendingNodes = offendingNodes ?? new IHtmlNode[0];
             Passed = passed;
@@ -25,21 +25,21 @@ namespace Sprachtml.Conventions.Rules
         public bool Passed { get; }
         public string Message { get; }
 
-        public static ConventionResult Pass() => new ConventionResult(true);
+        public static RuleResult Pass() => new RuleResult(true);
     }
 
     public class ButtonMustSpecifyTypeAttribute : IConventionRule
     {
-        public ConventionResult Test(ICollection<IHtmlNode> nodes)
+        public RuleResult Test(ICollection<IHtmlNode> nodes)
         {
             var offendingNodes = nodes.TraverseAll()
                 .Where(n => n.NodeType == HtmlNodeType.Button)
                 .Where(n => n.Attributes.All(a => !string.Equals(a.Name, "type")))
                 .ToArray();
             if (offendingNodes.Any())
-                return new ConventionResult(false, $"Input failed convention {nameof(ButtonMustSpecifyTypeAttribute)}",
+                return new RuleResult(false, $"Input failed rule {nameof(ButtonMustSpecifyTypeAttribute)}",
                     offendingNodes);
-            return ConventionResult.Pass();
+            return RuleResult.Pass();
         }
     }
 }
