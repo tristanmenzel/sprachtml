@@ -30,8 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Conventional, Version=1.3.0.121, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Best.Conventional.1.3.0.121\lib\net45\Conventional.dll</HintPath>
+    <Reference Include="Conventional, Version=1.3.0.122, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Best.Conventional.1.3.0.122\lib\net45\Conventional.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Mono.Cecil, Version=0.9.5.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
