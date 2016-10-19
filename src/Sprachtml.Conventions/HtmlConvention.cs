@@ -65,23 +65,30 @@ namespace Sprachtml.Conventions
 
             public FileResult(string path, SprachtmlParseException ex)
             {
+                Path = path;
                 Ex = ex;
             }
 
             public override string ToString()
             {
                 var sb = new StringBuilder();
+                sb.AppendLine(Path);
+
                 if (RuleResults != null)
                 {
-                    sb.AppendLine(Path);
                     foreach (var ruleResult in RuleResults)
                     {
                         sb.AppendLine($"\t{ruleResult.Message}");
                         foreach (var offendingNode in ruleResult.OffendingNodes)
                         {
-                            sb.AppendLine($"\t\tNode: {offendingNode.NodeLocation}");
+                            sb.AppendLine($"\t\tLoc: {offendingNode.NodeLocation}");
                         }
                     }
+                }
+                if (Ex != null)
+                {
+                    sb.AppendLine($"\tCould not be parsed");
+                    sb.AppendLine($"\t\t{Ex.Message} {Ex.InnerException.Message}");
                 }
                 return sb.ToString();
             }
