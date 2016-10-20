@@ -67,7 +67,7 @@ namespace Sprachtml.Models
 
         Br,
 
-
+        DocType,
 
         // Deprectiated
         B,

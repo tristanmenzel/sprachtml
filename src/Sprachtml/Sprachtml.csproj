@@ -48,6 +48,7 @@
     <Compile Include="Extensions\EnumerableCharExtensions.cs" />
     <Compile Include="Extensions\IHtmlNodeExtensions.cs" />
     <Compile Include="Models\CommentNode.cs" />
+    <Compile Include="Models\DocTypeNode.cs" />
     <Compile Include="Models\HtmlAttribute.cs" />
     <Compile Include="Models\HtmlNode.cs" />
     <Compile Include="Models\HtmlNodeType.cs" />

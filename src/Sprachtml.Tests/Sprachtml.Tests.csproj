@@ -55,6 +55,7 @@
     <Compile Include="Attributes\GivenDivWithIdMarkup.cs" />
     <Compile Include="Attributes\UnquotedAttributesWithNoSpaces.cs" />
     <Compile Include="CustomElements\CustomElements.cs" />
+    <Compile Include="DocTypes\GivenDocTypeAtStartOfInput.cs" />
     <Compile Include="Errors\MalformedHtml.cs" />
     <Compile Include="GenericTags\GivenDivMarkup.cs" />
     <Compile Include="GenericTags\GivenHtmlWithNewLinesInIt.cs" />

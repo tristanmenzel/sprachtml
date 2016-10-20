@@ -93,6 +93,21 @@ namespace Sprachtml.Parsers
             from openGt in Parse.Char('>')
             select new HtmlNode(tagName.NodeType, tagName.Value, attributes.ToArray(), new IHtmlNode[0]);
 
+        public static Parser<QuotedString> DocTypeProperties =>
+            from ws in Parse.WhiteSpace.AtLeastOnce()
+            from prop in QuotedString
+            select prop;
+
+        public static Parser<IHtmlNode> DocTypeTag =>
+            from lt in Parse.Char('<')
+            from bang in Parse.Char('!')
+            from docType in Parse.IgnoreCase("doctype")
+            from properties in DocTypeProperties.Many()
+            from gt in Parse.Char('>')
+            select new DocTypeNode(properties.ToArray());
+
+            
+
         private static Parser<T> WithPosition<T>(this Parser<T> parser) where T : IHtmlNode
         {
             return i =>
@@ -117,7 +132,8 @@ namespace Sprachtml.Parsers
 
 
         public static Parser<IEnumerable<IHtmlNode>> HtmlParser =>
-            Comment
+            DocTypeTag
+                .Or(Comment)
                 .Or(ScriptTag)
                 .Or(StyleTag)
                 .Or(SelfClosingHtmlTag)
