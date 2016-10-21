@@ -64,6 +64,7 @@ namespace Sprachtml.Models
 
         Strong,
         Em,
+        Del,
 
         Br,
 
@@ -73,6 +74,9 @@ namespace Sprachtml.Models
         B,
         I,
         Font,
-        Center
+        Center,
+        S,
+        U,
+        Strike
     }
 }
