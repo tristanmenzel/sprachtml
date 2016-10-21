@@ -70,7 +70,7 @@ namespace Sprachtml.Models
 
         DocType,
 
-        // Deprectiated
+        // Deprecated 
         B,
         I,
         Font,
