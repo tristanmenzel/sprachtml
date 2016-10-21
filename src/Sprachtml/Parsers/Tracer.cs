@@ -6,29 +6,39 @@ namespace Sprachtml.Parsers
 {
     public class Tracer
     {
-        [ThreadStatic] public static Tracer Instance;
+        [ThreadStatic]
+        public static Tracer Instance;
 
         public Stack<string> Nodes { get; }
 
         public Tracer()
         {
             Nodes = new Stack<string>();
+            Positions = new Stack<Position>();
         }
+
+        public Stack<Position> Positions { get; set; }
 
         public Parser<object> Push(string nodeName)
         {
             Nodes.Push(nodeName);
 
-            return VoidParser;
+            return VoidParser(true);
         }
 
         public Parser<object> Pop()
         {
             Nodes.Pop();
-
-            return VoidParser;
+            Positions.Pop();
+            return VoidParser(false);
         }
 
-        public Parser<object> VoidParser => input => Result.Success<object>(null, input);
+        public Func<bool, Parser<object>> VoidParser => pushPosition =>
+            input =>
+            {
+                if (pushPosition)
+                    Positions.Push(new Position(input.Position, input.Line, input.Column));
+                return Result.Success<object>(null, input);
+            };
     }
 }

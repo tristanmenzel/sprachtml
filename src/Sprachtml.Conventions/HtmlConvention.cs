@@ -87,8 +87,9 @@ namespace Sprachtml.Conventions
                 }
                 if (Ex != null)
                 {
-                    sb.AppendLine($"\tCould not be parsed");
-                    sb.AppendLine($"\t\t{Ex.Message} {Ex.InnerException.Message}");
+                    sb.AppendLine($"\t{Ex.Message}");
+                    sb.AppendLine($"\t\tLoc: {Ex.Location}");
+                    sb.AppendLine($"\t\tXPath: {Ex.XPath}");
                 }
                 return sb.ToString();
             }
