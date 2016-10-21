@@ -64,6 +64,7 @@ namespace Sprachtml.Models
 
         Strong,
         Em,
+        Blockquote,
 
         Br,
 
@@ -72,6 +73,8 @@ namespace Sprachtml.Models
         // Deprectiated
         B,
         I,
+        U,
+        S,
         Font,
         Center
     }
