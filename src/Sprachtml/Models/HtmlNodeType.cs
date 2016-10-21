@@ -65,6 +65,7 @@ namespace Sprachtml.Models
         Strong,
         Em,
         Del,
+        Blockquote,
 
         Br,
 
