@@ -11,21 +11,33 @@ namespace Sprachtml.Conventions
 {
     public class HtmlConvention : SolutionConventionSpecification
     {
-        private readonly IConventionRule[] _rules;
-        private readonly string _searchPattern;
-        private readonly string[] _excludedFiles;
+        public IConventionRule[] Rules { get; }
+        public string SearchPattern { get; }
+        public string[] ExcludedFiles { get; }
+
+
+        public string SolutionSubdirectory { get; set; }
 
         public HtmlConvention(IConventionRule[] rules, string searchPattern = "*.html", string[] excludedFiles = null)
         {
-            _rules = rules;
-            _searchPattern = searchPattern;
-            _excludedFiles = excludedFiles ?? new string[0];
+            Rules = rules;
+            SearchPattern = searchPattern;
+            ExcludedFiles = excludedFiles ?? new string[0];
         }
 
-        private IEnumerable<FileResult> Test(string directory)
+        private string GetDirectory(string solutionDirectory)
         {
-            foreach (var filePath in Directory.GetFiles(directory, _searchPattern, SearchOption.AllDirectories)
-                .Where(p => !_excludedFiles.Any(x => p.EndsWith(x, StringComparison.InvariantCultureIgnoreCase))))
+            if(SolutionSubdirectory == null)
+                return solutionDirectory;
+            return Path.GetFullPath(Path.Combine(solutionDirectory, SolutionSubdirectory));
+        }
+
+        private IEnumerable<FileResult> Test(string solutionDirectory)
+        {
+            var dir = GetDirectory(solutionDirectory);
+
+            foreach (var filePath in Directory.GetFiles(dir, SearchPattern, SearchOption.AllDirectories)
+                .Where(p => !ExcludedFiles.Any(x => p.EndsWith(x, StringComparison.InvariantCultureIgnoreCase))))
             {
                 var fileContents = File.ReadAllText(filePath);
                 RuleResult[] results = new RuleResult[0];
@@ -34,7 +46,7 @@ namespace Sprachtml.Conventions
                 try
                 {
                     var parsed = SprachtmlParser.Parse(fileContents);
-                    results = _rules
+                    results = Rules
                         .Select(r => r.Test(parsed))
                         .Where(r => !r.Passed)
                         .ToArray();
