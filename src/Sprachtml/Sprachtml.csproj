@@ -47,6 +47,9 @@
     <Compile Include="Exceptions\SprachtmlParseException.cs" />
     <Compile Include="Extensions\EnumerableCharExtensions.cs" />
     <Compile Include="Extensions\IHtmlNodeExtensions.cs" />
+    <Compile Include="Helpers\TagHelper.cs" />
+    <Compile Include="Meta\ObsoleteDeprecatedOrNonStandardAttribute.cs" />
+    <Compile Include="Meta\VoidElementAttribute.cs" />
     <Compile Include="Models\CommentNode.cs" />
     <Compile Include="Models\DocTypeNode.cs" />
     <Compile Include="Models\HtmlAttribute.cs" />

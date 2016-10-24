@@ -73,6 +73,7 @@
     <Compile Include="StyleTags\EmptyStyleTag.cs" />
     <Compile Include="Text\PlainText.cs" />
     <Compile Include="Text\TextWithHtml.cs" />
+    <Compile Include="VoidTags\VoidTags.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

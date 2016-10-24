@@ -1,3 +1,5 @@
+using Sprachtml.Meta;
+
 namespace Sprachtml.Models
 {
     public enum HtmlNodeType
@@ -5,15 +7,81 @@ namespace Sprachtml.Models
         Custom,
         Text,
         Comment,
-        Script,
-        Style, 
+        DocType,
 
-        Html,
-        Head,
+        A,
+        Abbr,
+        [ObsoleteDeprecatedOrNonStandard]
+        Acronym,
+        Address,
+        [ObsoleteDeprecatedOrNonStandard]
+        Applet,
+        [VoidElement]
+        Area,
+        Article,
+        Aside,
+        Audio,
+
+        B,
+        [VoidElement]
+        Base,
+        [ObsoleteDeprecatedOrNonStandard]
+        Basefont,
+        Bdi,
+        Bdo,
+        [ObsoleteDeprecatedOrNonStandard]
+        Bgsound,
+        [ObsoleteDeprecatedOrNonStandard]
+        Big,
+        [ObsoleteDeprecatedOrNonStandard]
+        Blink,
+        Blockquote,
         Body,
-        Title,
-        Meta,
+        [VoidElement]
+        Br,
+        Button,
 
+        Canvas,
+        Caption,
+        [ObsoleteDeprecatedOrNonStandard]
+        Center,
+        Cite,
+        Code,
+        [VoidElement]
+        Col,
+        Colgroup,
+        Content,
+        [VoidElement]
+        [ObsoleteDeprecatedOrNonStandard]
+        Command,
+
+        Data,
+        Datalist,
+        Dd,
+        Del,
+        Details,
+        Dfn,
+        [ObsoleteDeprecatedOrNonStandard]
+        Dir,
+        Div,
+        Dl,
+        Dt,
+
+        Em,
+        [VoidElement]
+        Embed,
+
+        Fieldset,
+        Figcaption,
+        Figure,
+        [ObsoleteDeprecatedOrNonStandard]
+        Font,
+        Footer,
+        Form,
+        [ObsoleteDeprecatedOrNonStandard]
+        Frame,
+        [ObsoleteDeprecatedOrNonStandard]
+        Frameset,
 
         H1,
         H2,
@@ -21,63 +89,120 @@ namespace Sprachtml.Models
         H4,
         H5,
         H6,
-
-        Div,
-        Span,
-        P,
-        Img,
-
-        Ul,
-        Ol,
-        Li,
-
-        Dl,
-        Dt,
-        Dd,
-
-        A,
-
-        Article,
-        Aside,
-        Section,
+        Head,
         Header,
-        Footer,
+        [ObsoleteDeprecatedOrNonStandard]
+        Hgroup,
+        [VoidElement]
+        Hr,
+        Html,
 
-        Form,
+        I,
+        Iframe,
+        [VoidElement]
+        Img,
+        [VoidElement]
         Input,
-        Textarea,
-        Button,
-        Select,
-        Option,
+        Ins,
+        [ObsoleteDeprecatedOrNonStandard]
+        Isindex,
 
-        Fieldset,
+        Kbd,
+        [VoidElement]
+        Keygen,
+
+        Label,
         Legend,
+        Li,
+        [VoidElement]
+        Link,
+        [ObsoleteDeprecatedOrNonStandard]
+        Listing,
+
+        Main,
+        Map,
+        Mark,
+        [ObsoleteDeprecatedOrNonStandard]
+        Marquee,
+        Menu,
+        Menuitem,
+        [VoidElement]
+        Meta,
+        Meter,
+
+        Nav,
+        [ObsoleteDeprecatedOrNonStandard]
+        Nobr,
+        [ObsoleteDeprecatedOrNonStandard]
+        Noframes,
+        Noscript,
+
+        Object,
+        Ol,
+        Optgroup,
+        Option,
+        Output,
+
+        P,
+        [VoidElement]
+        Param,
+        [ObsoleteDeprecatedOrNonStandard]
+        Plaintext,
+        Pre,
+        Progress,
+
+        Q,
+
+        Rp,
+        Rt,
+        Ruby,
+
+        S,
+        Samp,
+        Script,
+        Section,
+        Select,
+        Shadow,
+        Small,
+        [VoidElement]
+        Source,
+        [ObsoleteDeprecatedOrNonStandard]
+        Spacer,
+        Span,
+        [ObsoleteDeprecatedOrNonStandard]
+        Strike,
+        Strong,
+        Style,
+        Sub,
+        Summary,
+        Sup,
 
         Table,
-        Thead,
         Tbody,
-        Tfood,
-        Tr,
-        Th,
         Td,
-        Caption,
+        Template,
+        Textarea,
+        Tfoot,
+        Th,
+        Thead,
+        Time,
+        Title,
+        Tr,
+        [VoidElement]
+        Track,
+        [ObsoleteDeprecatedOrNonStandard]
+        Tt,
 
-        Strong,
-        Em,
-        Del,
-        Blockquote,
-
-        Br,
-
-        DocType,
-
-        // Deprecated 
-        B,
-        I,
-        Font,
-        Center,
-        S,
         U,
-        Strike
+        Ul,
+
+        Var,
+        Video,
+
+        [VoidElement]
+        Wbr,
+
+        [ObsoleteDeprecatedOrNonStandard]
+        Xmp,
     }
 }
