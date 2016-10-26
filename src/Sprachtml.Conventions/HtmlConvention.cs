@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Conventional.Conventions.Solution;
+using Sprachtml.Conventions.Models;
 using Sprachtml.Conventions.Rules;
 using Sprachtml.Exceptions;
 

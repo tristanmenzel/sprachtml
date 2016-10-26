@@ -74,8 +74,13 @@
     <Compile Include="Rules\ButtonMustSpecifyTypeAttributeScenarios\GivenButtonsThatDoNotHaveTypeAttributes.cs" />
     <Compile Include="Rules\ButtonMustSpecifyTypeAttributeScenarios\GivenNoButtons.cs" />
     <Compile Include="Rules\ButtonMustSpecifyTypeAttributeScenarios\ScenarioBase.cs" />
-    <Compile Include="SolutionConventions\Buttons\AllHtmlFilesInSolutionWhichAreSuffixedWithFail.cs" />
-    <Compile Include="SolutionConventions\Buttons\AllHtmlFilesInSolutionWhichAreSuffixedWithPass.cs" />
+    <Compile Include="SolutionConventions\MustHaveAnyAttributeTests\AllHtmlFilesInSolutionWhichAreSuffixedWithFail.cs" />
+    <Compile Include="SolutionConventions\MustHaveAnyAttributeTests\AllHtmlFilesInSolutionWhichAreSuffixedWithPass.cs" />
+    <Compile Include="SolutionConventions\ButtonMustSpecifyTypeAttributeTests\AllHtmlFilesInSolutionWhichAreSuffixedWithFail.cs" />
+    <Compile Include="SolutionConventions\ButtonMustSpecifyTypeAttributeTests\AllHtmlFilesInSolutionWhichAreSuffixedWithPass.cs" />
+    <Compile Include="SolutionConventions\Shared\AllFilesInFolderBase.cs" />
+    <Compile Include="SolutionConventions\Shared\AllFilesInFolderWhichAreSuffixedWithDotFailDotHtml.cs" />
+    <Compile Include="SolutionConventions\Shared\AllFilesInFolderWhichAreSuffixedWithDotPassDotHtml.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -91,8 +96,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Html\Buttons\SingleButton.Fail.html" />
-    <Content Include="Html\Buttons\SingleButton.Pass.html" />
+    <Content Include="Html\ElementMustHaveAnyAttribute\Lowercase.Fail.html" />
+    <Content Include="Html\ElementMustHaveAnyAttribute\Lowercase.Pass.html" />
+    <Content Include="Html\ButtonMustSpecifyTypeAttribute\SingleButton.Fail.html" />
+    <Content Include="Html\ButtonMustSpecifyTypeAttribute\SingleButton.Pass.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
