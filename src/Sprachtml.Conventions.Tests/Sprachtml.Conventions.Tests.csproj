@@ -74,8 +74,8 @@
     <Compile Include="Rules\ButtonMustSpecifyTypeAttributeScenarios\GivenButtonsThatDoNotHaveTypeAttributes.cs" />
     <Compile Include="Rules\ButtonMustSpecifyTypeAttributeScenarios\GivenNoButtons.cs" />
     <Compile Include="Rules\ButtonMustSpecifyTypeAttributeScenarios\ScenarioBase.cs" />
-    <Compile Include="SolutionConventions\MustHaveAnyAttributeTests\AllHtmlFilesInSolutionWhichAreSuffixedWithFail.cs" />
-    <Compile Include="SolutionConventions\MustHaveAnyAttributeTests\AllHtmlFilesInSolutionWhichAreSuffixedWithPass.cs" />
+    <Compile Include="SolutionConventions\ElementMustHaveAtLeastOneOfAttributeTests\AllHtmlFilesInSolutionWhichAreSuffixedWithFail.cs" />
+    <Compile Include="SolutionConventions\ElementMustHaveAtLeastOneOfAttributeTests\AllHtmlFilesInSolutionWhichAreSuffixedWithPass.cs" />
     <Compile Include="SolutionConventions\ButtonMustSpecifyTypeAttributeTests\AllHtmlFilesInSolutionWhichAreSuffixedWithFail.cs" />
     <Compile Include="SolutionConventions\ButtonMustSpecifyTypeAttributeTests\AllHtmlFilesInSolutionWhichAreSuffixedWithPass.cs" />
     <Compile Include="SolutionConventions\Shared\AllFilesInFolderBase.cs" />
@@ -96,8 +96,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Html\ElementMustHaveAnyAttribute\Lowercase.Fail.html" />
-    <Content Include="Html\ElementMustHaveAnyAttribute\Lowercase.Pass.html" />
+    <Content Include="Html\ElementMustHaveAtLeastOneOfAttribute\Lowercase.Fail.html" />
+    <Content Include="Html\ElementMustHaveAtLeastOneOfAttribute\Lowercase.Pass.html" />
     <Content Include="Html\ButtonMustSpecifyTypeAttribute\SingleButton.Fail.html" />
     <Content Include="Html\ButtonMustSpecifyTypeAttribute\SingleButton.Pass.html" />
   </ItemGroup>

@@ -7,19 +7,19 @@ using Sprachtml.Models;
 
 namespace Sprachtml.Conventions.Rules
 {
-    public class ElementMustHaveAnyAttribute : IConventionRule
+    public class ElementMustHaveAtLeastOneOfAttribute : IConventionRule
     {
         private readonly HtmlNodeType? _nodeType;
         private readonly string _tagName;
         private readonly string[] _attributes;
 
-        public ElementMustHaveAnyAttribute(HtmlNodeType nodeType, string[] attributes)
+        public ElementMustHaveAtLeastOneOfAttribute(HtmlNodeType nodeType, string[] attributes)
         {
             _nodeType = nodeType;
             _attributes = attributes;
         }
 
-        public ElementMustHaveAnyAttribute(string tagName, string[] attributes)
+        public ElementMustHaveAtLeastOneOfAttribute(string tagName, string[] attributes)
         {
             _tagName = tagName;
             _attributes = attributes;
