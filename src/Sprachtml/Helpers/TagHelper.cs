@@ -18,5 +18,13 @@ namespace Sprachtml.Helpers
                     .Any())
                 .ToArray();
         }
+
+        public static HtmlNodeType GetTypeFromName(string identifier)
+        {
+            // SingleOrDefault will default to custom for no match
+            return Enum.GetValues(typeof(HtmlNodeType))
+                  .Cast<HtmlNodeType>()
+                  .SingleOrDefault(n => string.Equals(n.ToString(), identifier, StringComparison.InvariantCultureIgnoreCase));
+        }
     }
 }

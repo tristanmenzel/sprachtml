@@ -69,6 +69,7 @@
     <Compile Include="Models\RuleResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rules\ButtonMustSpecifyTypeAttribute.cs" />
+    <Compile Include="Rules\ConventionRuleBase.cs" />
     <Compile Include="Rules\IConventionRule.cs" />
     <Compile Include="Rules\ElementMustHaveAtLeastOneOfAttribute.cs" />
   </ItemGroup>

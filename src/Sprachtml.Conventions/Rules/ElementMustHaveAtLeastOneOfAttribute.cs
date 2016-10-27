@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using Sprachtml.Conventions.Models;
 using Sprachtml.Extensions;
+using Sprachtml.Helpers;
 using Sprachtml.Models;
 
 namespace Sprachtml.Conventions.Rules
 {
-    public class ElementMustHaveAtLeastOneOfAttribute : IConventionRule
+    public class ElementMustHaveAtLeastOneOfAttribute : ConventionRuleBase
     {
-        private readonly HtmlNodeType? _nodeType;
+        private readonly HtmlNodeType _nodeType;
         private readonly string _tagName;
         private readonly string[] _attributes;
 
@@ -21,24 +22,24 @@ namespace Sprachtml.Conventions.Rules
 
         public ElementMustHaveAtLeastOneOfAttribute(string tagName, string[] attributes)
         {
-            _tagName = tagName;
+            _nodeType = TagHelper.GetTypeFromName(tagName);
+            if (_nodeType == HtmlNodeType.Custom)
+                _tagName = tagName;
             _attributes = attributes;
         }
 
-        public RuleResult Test(ICollection<IHtmlNode> nodes)
+        protected override bool IsOffending(IHtmlNode node)
         {
-            var offendingNodes = nodes.TraverseAll()
-                .Where(n=>!_nodeType.HasValue || n.NodeType == _nodeType)
-                .Where(n=>_tagName == null || string.Equals((n as HtmlNode)?.TagName, _tagName, StringComparison.InvariantCultureIgnoreCase))
-                .Where(
-                    n =>
-                        !n.Attributes.Any(
-                            a => _attributes.Any(rq => rq.Equals(a.Name, StringComparison.InvariantCultureIgnoreCase))))
-                .ToArray();
-            if (offendingNodes.Any())
-                return new RuleResult(false, $"Input failed rule {nameof(ButtonMustSpecifyTypeAttribute)}",
-                    offendingNodes);
-            return RuleResult.Pass();
+            if (node.NodeType != _nodeType)
+                return false;
+
+            if (_tagName != null &&
+                !string.Equals((node as HtmlNode)?.TagName, _tagName, StringComparison.InvariantCultureIgnoreCase))
+                return false;
+
+            return !node.Attributes
+                .Any(a => _attributes
+                    .Any(rq => rq.Equals(a.Name, StringComparison.InvariantCultureIgnoreCase)));
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Sprachtml.Helpers;
 
 namespace Sprachtml.Models
 {
@@ -8,10 +9,7 @@ namespace Sprachtml.Models
         public TagIdentifier(string identifier)
         {
             Value = identifier;
-            // SingleOrDefault will default to custom for no match
-            NodeType = Enum.GetValues(typeof(HtmlNodeType))
-                .Cast<HtmlNodeType>()
-                .SingleOrDefault(n => string.Equals(n.ToString(), identifier, StringComparison.InvariantCultureIgnoreCase));
+            NodeType = TagHelper.GetTypeFromName(identifier);
 
 
         }
