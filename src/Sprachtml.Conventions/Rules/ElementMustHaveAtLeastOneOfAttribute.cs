@@ -37,9 +37,8 @@ namespace Sprachtml.Conventions.Rules
                 !string.Equals((node as HtmlNode)?.TagName, _tagName, StringComparison.InvariantCultureIgnoreCase))
                 return false;
 
-            return !node.Attributes
-                .Any(a => _attributes
-                    .Any(rq => rq.Equals(a.Name, StringComparison.InvariantCultureIgnoreCase)));
+            return !_attributes
+                .Any(node.HasAttribute);
         }
     }
 }
