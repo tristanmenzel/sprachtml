@@ -83,7 +83,7 @@ namespace Sprachtml.Parsers
             from closeTagName in Parse.IgnoreCase(tagName.Value)
             from closeGt in Parse.Char('>')
             from t2 in Tracer.Instance.Pop()
-            select new HtmlNode(tagName.NodeType, tagName.Value, attributes.ToArray(), children.ToArray());
+            select new HtmlNode(TagStyle.Closed, tagName.NodeType, tagName.Value, attributes.ToArray(), children.ToArray());
 
         public static Parser<TagIdentifier> AllowedVoidTags =>
             from tagName in TagHelper.GetVoidNodeTypes()
@@ -97,7 +97,7 @@ namespace Sprachtml.Parsers
             from attributes in AttributeParser.Many()
             from ws1 in Parse.WhiteSpace.Many()
             from openGt in Parse.Char('>')
-            select new HtmlNode(tagName.NodeType, tagName.Value, attributes.ToArray(), new IHtmlNode[0]);
+            select new HtmlNode(TagStyle.Void,  tagName.NodeType, tagName.Value, attributes.ToArray(), new IHtmlNode[0]);
 
         public static Parser<IHtmlNode> SelfClosingHtmlTag =>
             from openLt in Parse.Char('<')
@@ -106,7 +106,7 @@ namespace Sprachtml.Parsers
             from ws1 in Parse.WhiteSpace.Many()
             from selfClosingSlash in Parse.Char('/')
             from openGt in Parse.Char('>')
-            select new HtmlNode(tagName.NodeType, tagName.Value, attributes.ToArray(), new IHtmlNode[0]);
+            select new HtmlNode(TagStyle.SelfClosing, tagName.NodeType, tagName.Value, attributes.ToArray(), new IHtmlNode[0]);
 
         public static Parser<QuotedString> DocTypeProperties =>
             from ws in Parse.WhiteSpace.AtLeastOnce()

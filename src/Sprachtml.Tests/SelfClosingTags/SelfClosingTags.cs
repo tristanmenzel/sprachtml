@@ -14,6 +14,7 @@ namespace Sprachtml.Tests.SelfClosingTags
             parsed.Length.ShouldBe(1);
             parsed[0].Children.ShouldBeEmpty();
             parsed[0].NodeType.ShouldBe(HtmlNodeType.Br);
+            parsed[0].TagStyle.ShouldBe(TagStyle.SelfClosing);
         }
 
         protected override string Markup => "<br />";

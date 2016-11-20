@@ -12,6 +12,7 @@ namespace Sprachtml.Models
             Contents = contents;
         }
 
+        public TagStyle TagStyle => TagStyle.Special;
         public HtmlNodeType NodeType => HtmlNodeType.Text;
         IHtmlNode[] IHtmlNode.Children => new IHtmlNode[0];
         HtmlAttribute[] IHtmlNode.Attributes => new HtmlAttribute[0];

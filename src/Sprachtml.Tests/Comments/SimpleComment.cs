@@ -14,6 +14,7 @@ namespace Sprachtml.Tests.Comments
             parsed.Length.ShouldBe(1);
 
             parsed[0].NodeType.ShouldBe(HtmlNodeType.Comment);
+            parsed[0].TagStyle.ShouldBe(TagStyle.Special);
         }
 
         protected override string Markup => "<!-- test -->";
