@@ -5,7 +5,7 @@ namespace Sprachtml.Models
     public class HtmlAttribute
     {
         public string Name { get; }
-        public string Value { get; }
+        public QuotedString Value { get; }
 
         public bool Binary { get; }
 
@@ -14,8 +14,7 @@ namespace Sprachtml.Models
             Name = name;
             if (value.IsDefined)
             {
-                Value = value.Get().Text;
-                QuoteType = value.Get().QuoteType;
+                Value = value.Get();
             }
             else
             {
@@ -23,6 +22,5 @@ namespace Sprachtml.Models
             }
         }
 
-        public QuoteType QuoteType { get;  }
     }
 }

@@ -66,6 +66,7 @@
     <Compile Include="Parsers\Tracer.cs" />
     <Compile Include="SprachtmlParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Formatters\HtmlFormatter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

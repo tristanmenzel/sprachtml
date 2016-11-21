@@ -22,7 +22,7 @@ namespace Sprachtml.Tests.Attributes
             div.Attributes.Length.ShouldBe(1);
 
             div.Attributes[0].Name.ShouldBe("id");
-            div.Attributes[0].Value.ShouldBe("TestId");
+            div.Attributes[0].Value.Text.ShouldBe("TestId");
             div.Attributes[0].Binary.ShouldBeFalse("Id should not be a binary attribute");
         }
     }

@@ -24,6 +24,7 @@ namespace Sprachtml.Helpers
             // SingleOrDefault will default to custom for no match
             return Enum.GetValues(typeof(HtmlNodeType))
                   .Cast<HtmlNodeType>()
+                  .Where(n=>n != HtmlNodeType.Comment && n != HtmlNodeType.DocType)
                   .SingleOrDefault(n => string.Equals(n.ToString(), identifier, StringComparison.InvariantCultureIgnoreCase));
         }
     }
