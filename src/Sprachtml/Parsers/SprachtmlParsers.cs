@@ -75,6 +75,7 @@ namespace Sprachtml.Parsers
             from openLt in Parse.Char('<')
             from tagName in TagNameParser
             from attributes in AttributeParser.Many()
+            from ws in Parse.WhiteSpace.Many()
             from openGt in Parse.Char('>').Once()
             from t1 in Tracer.Instance.Push(tagName.Value)
             from children in HtmlChildParser
