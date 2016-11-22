@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Net.Http.Headers;
 using Sprache;
 using Sprachtml.Exceptions;
 using Sprachtml.Models;
@@ -19,9 +18,16 @@ namespace Sprachtml
             }
             catch (ParseException parseException)
             {
-                if (tracer.Positions.Any())
-                    throw new SprachtmlParseException($"The input could not be parsed",
-                        tracer.Positions.Peek(),
+                if (tracer.AttrPositions.Any())
+                    throw new SprachtmlParseException($"The input could not be parsed. Invalid attribute at ({tracer.AttrPositions.Peek()})",
+                        tracer.NodePositions.Peek(),
+                        tracer.AttrPositions.Peek(),
+                        String.Join(" > ", tracer.Nodes.Reverse()),
+                        parseException);
+
+                if (tracer.NodePositions.Any())
+                    throw new SprachtmlParseException($"The input could not be parsed. Incomplete node at ({tracer.NodePositions.Peek()})",
+                        tracer.NodePositions.Peek(),
                         String.Join(" > ", tracer.Nodes.Reverse()),
                         parseException);
                 throw new SprachtmlParseException($"The input could not be parsed",

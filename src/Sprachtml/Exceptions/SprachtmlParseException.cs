@@ -5,16 +5,30 @@ namespace Sprachtml.Exceptions
 {
     public class SprachtmlParseException:Exception
     {
-        public Position Location { get; }
+        public Position NodeLocation { get; }
+        public Position AttrPosition { get; }
         public string XPath { get; }
 
         public SprachtmlParseException(string message,
-            Position location,
+            Position nodeLocation,
             string xPath,
             ParseException innerException)
             :base(message, innerException)
         {
-            Location = location;
+            NodeLocation = nodeLocation;
+            XPath = xPath;
+        }
+
+
+        public SprachtmlParseException(string message,
+            Position nodeLocation,
+            Position attrPosition,
+            string xPath,
+            ParseException innerException)
+            : base(message, innerException)
+        {
+            NodeLocation = nodeLocation;
+            AttrPosition = attrPosition;
             XPath = xPath;
         }
     }

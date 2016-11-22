@@ -101,7 +101,7 @@ namespace Sprachtml.Conventions
                 if (Ex != null)
                 {
                     sb.AppendLine($"\t{Ex.Message}");
-                    sb.AppendLine($"\t\tLoc: {Ex.Location}");
+                    sb.AppendLine($"\t\tLoc: {Ex.NodeLocation}");
                     sb.AppendLine($"\t\tXPath: {Ex.XPath}");
                 }
                 return sb.ToString();

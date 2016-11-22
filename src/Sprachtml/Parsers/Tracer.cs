@@ -11,31 +11,42 @@ namespace Sprachtml.Parsers
         public Tracer()
         {
             Nodes = new Stack<string>();
-            Positions = new Stack<Position>();
+            NodePositions = new Stack<Position>();
+            AttrPositions = new Stack<Position>();
         }
 
-        public Stack<Position> Positions { get; set; }
+        public Stack<Position> NodePositions { get; set; }
+        public Stack<Position> AttrPositions { get; set; }
 
-        public Parser<object> Push(string nodeName)
+        public Parser<object> Push(string nodeName, Position position)
         {
             Nodes.Push(nodeName);
-
-            return VoidParser(true);
+            NodePositions.Push(position);
+            return VoidParser;
         }
+
+        public Parser<object> PushAttr(Position position)
+        {
+            AttrPositions.Push(position);
+            return VoidParser;
+        }
+
+        public Parser<object> ResetAttrPositions()
+        {
+            AttrPositions.Clear();
+            return VoidParser;
+        }
+
+        public Parser<Position> CurrentPosition
+            => input => Result.Success(new Position(input.Position, input.Line, input.Column), input);
 
         public Parser<object> Pop()
         {
             Nodes.Pop();
-            Positions.Pop();
-            return VoidParser(false);
+            NodePositions.Pop();
+            return VoidParser;
         }
 
-        public Func<bool, Parser<object>> VoidParser => pushPosition =>
-            input =>
-            {
-                if (pushPosition)
-                    Positions.Push(new Position(input.Position, input.Line, input.Column));
-                return Result.Success<object>(null, input);
-            };
+        public Parser<object> VoidParser => input => Result.Success<object>(null, input);
     }
 }

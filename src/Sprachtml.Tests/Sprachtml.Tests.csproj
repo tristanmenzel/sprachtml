@@ -75,10 +75,13 @@
     <Compile Include="ScriptTags\NonEmptyScriptTag.cs" />
     <Compile Include="ScriptTags\RegularHtmlAndScriptTags.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScriptTags\ScriptTagWithAttributes.cs" />
     <Compile Include="SelfClosingTags\SelfClosingTags.cs" />
     <Compile Include="StyleTags\EmptyStyleTag.cs" />
     <Compile Include="Text\PlainText.cs" />
     <Compile Include="Text\TextWithHtml.cs" />
+    <Compile Include="TracerTests\WhenADivDoesNotHaveAClosingTag.cs" />
+    <Compile Include="TracerTests\WhenAnAnchorHasNoSpacesBetweenItsAttributes.cs" />
     <Compile Include="VoidTags\VoidTagsWhichAreInTheAllowedList.cs" />
     <Compile Include="VoidTags\VoidTagsWhichAreNotInTheAllowedList.cs" />
   </ItemGroup>
