@@ -12,21 +12,21 @@ namespace Sprachtml
     {
         public static IHtmlNode[] Parse(string html)
         {
+            var tracer = new Tracer();
             try
             {
-                Tracer.Instance = new Tracer();
-                return SprachtmlParsers.HtmlParser.Parse(html).ToArray();
+                return SprachtmlParsers.HtmlParser(tracer).Parse(html).ToArray();
             }
             catch (ParseException parseException)
             {
-                if (Tracer.Instance.Positions.Any())
+                if (tracer.Positions.Any())
                     throw new SprachtmlParseException($"The input could not be parsed",
-                        Tracer.Instance.Positions.Peek(),
-                        String.Join(" > ", Tracer.Instance.Nodes.Reverse()),
+                        tracer.Positions.Peek(),
+                        String.Join(" > ", tracer.Nodes.Reverse()),
                         parseException);
                 throw new SprachtmlParseException($"The input could not be parsed",
                     new Position(1, 1, 1),
-                    String.Join(" > ", Tracer.Instance.Nodes.Reverse()),
+                    String.Join(" > ", tracer.Nodes.Reverse()),
                     parseException);
             }
         }

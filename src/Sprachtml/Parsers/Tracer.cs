@@ -6,9 +6,6 @@ namespace Sprachtml.Parsers
 {
     public class Tracer
     {
-        [ThreadStatic]
-        public static Tracer Instance;
-
         public Stack<string> Nodes { get; }
 
         public Tracer()
