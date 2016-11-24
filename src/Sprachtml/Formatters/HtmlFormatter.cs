@@ -9,18 +9,23 @@ namespace Sprachtml.Formatters
     public enum HtmlFormatterOptions : long
     {
         None = 0x00,
-        RemoveComments = 0x01
+        RemoveComments = 0x01,
+        CollapseWhiteSpace = 0x02
     }
 
     public class HtmlFormatter : IDisposable
     {
         private readonly StreamWriter _writer;
         private readonly HtmlFormatterOptions _options;
+        private readonly HashSet<char> _whiteSpace;
 
         public HtmlFormatter(StreamWriter writer, HtmlFormatterOptions options = HtmlFormatterOptions.None)
         {
             _writer = writer;
             _options = options;
+            _whiteSpace = new HashSet<char>();
+            foreach (var c in " \r\n\t".ToCharArray())
+                _whiteSpace.Add(c);
         }
 
         public void WriteNodes(ICollection<IHtmlNode> nodes)
@@ -64,7 +69,22 @@ namespace Sprachtml.Formatters
 
         private void WriteTextNode(TextNode node)
         {
-            _writer.Write(node.Contents);
+            if (_options.HasFlag(HtmlFormatterOptions.CollapseWhiteSpace))
+            {
+                var lastWasWs = false;
+                foreach (char c in node.Contents)
+                {
+                    var isWs = _whiteSpace.Contains(c);
+                    if (lastWasWs && isWs)
+                        continue;
+                    lastWasWs = isWs;
+                    _writer.Write(isWs? ' ': c);
+                }
+            }
+            else
+            {
+                _writer.Write(node.Contents);
+            }
         }
 
         private void WriteAttributes(HtmlAttribute[] attributes)
@@ -104,7 +124,7 @@ namespace Sprachtml.Formatters
                 _writer.Write(' ');
                 WriteQuotedString(prop);
             }
-            _writer.Write('>');
+            _writer.WriteLine('>');
         }
 
         private void WriteComment(CommentNode node)

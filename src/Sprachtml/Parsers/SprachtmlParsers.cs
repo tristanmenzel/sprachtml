@@ -136,7 +136,7 @@ namespace Sprachtml.Parsers
             from docType in Parse.IgnoreCase("doctype")
             from properties in DocTypeProperties.Many()
             from ws in Parse.WhiteSpace.Many()
-            from gt in Parse.Char('>')
+            from gt in Parse.Char('>').Token()
             select new DocTypeNode(properties.ToArray());
 
 

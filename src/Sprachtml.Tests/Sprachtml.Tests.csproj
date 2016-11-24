@@ -60,7 +60,9 @@
     <Compile Include="Attributes\UnquotedAttributesWithNoSpaces.cs" />
     <Compile Include="CustomElements\CustomElements.cs" />
     <Compile Include="DocTypes\GivenDocTypeAtStartOfInput.cs" />
+    <Compile Include="DocTypes\GivenADocTypeWithProperties.cs" />
     <Compile Include="Errors\MalformedHtml.cs" />
+    <Compile Include="Formatter\ParsingAndFormattingADocumentWithCollapseWhitespaceOption.cs" />
     <Compile Include="Formatter\ParsingAndFormattingADocumentWithRemoveCommentOption.cs" />
     <Compile Include="Formatter\ParsingAndFormattingADocument.cs" />
     <Compile Include="GenericTags\GivenDivMarkup.cs" />
