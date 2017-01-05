@@ -3,6 +3,12 @@
 ## Build
 [![Build status](https://ci.appveyor.com/api/projects/status/43utb38g5xcrj3fp?svg=true)](https://ci.appveyor.com/project/tristanmenzel/sprachtml)
 
+## Installation
+
+```
+Install-Package Sprachtml
+```
+
 ## Basic usage
 
 ```csharp
@@ -19,6 +25,14 @@ var buttons = nodes.TraverseAll().Where(n=>n.NodeType == HtmlNodeType.Button).To
 ---
 
 # Sprachtml.Conventions - Conventions for your solution's html files
+
+## Installation
+
+```
+Install-Package Sprachtml.Conventions
+```
+
+## Usage 
 
 ```csharp
 [TestFixture]
