@@ -1,3 +1,5 @@
 src/*/bin/*
 src/.vs/*
 src/*/obj/*
+/src/.idea/
+*.DotSettings.user

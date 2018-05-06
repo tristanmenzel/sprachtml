@@ -8,7 +8,6 @@
     <owners>$author$</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <copyright>Copyright © 2016, Tristan Menzel</copyright>
     <tags>Html parsing conventions lint</tags>
 	<dependencies> 
       <dependency id="Sprachtml" version="$version$" />

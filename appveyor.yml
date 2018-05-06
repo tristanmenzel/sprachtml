@@ -1,0 +1,46 @@
+version: '1.0.{build}'
+image: Visual Studio 2017
+branches:
+  only:
+  - master
+init:
+  # Good practise, because Windows line endings are different from Unix/Linux ones
+  - cmd: git config --global core.autocrlf true
+install:
+  # Install repo specific stuff here
+dotnet_csproj:
+  patch: true
+  file: '**\*.csproj'
+  version: '{version}'
+before_build:
+  # Display .NET Core version
+  - cmd: dotnet --version
+  # Display minimal restore text
+  - cmd: dotnet restore ./src/ --verbosity m
+build_script:
+  # Package lib
+  - cmd: dotnet build ./src/Sprachtml/Sprachtml.csproj --configuration=release
+  - cmd: dotnet pack ./src/Sprachtml/Sprachtml.csproj --configuration=release
+  - cmd: dotnet build ./src/Sprachtml.Conventions/Sprachtml.Conventions.csproj --configuration=release
+  - cmd: dotnet pack ./src/Sprachtml.Conventions/Sprachtml.Conventions.csproj --configuration=release
+after_build:
+  # For once the build has completed
+artifacts:
+ - path: '\src\Sprachtml*\bin\release\*.nupkg'
+   name: Package
+   type: NugetPackage
+clone_depth: 1
+test_script:
+  # restore packages for our unit tests
+  - cmd: dotnet restore ./src/ --verbosity m
+  # run the unit tests
+  - cmd: dotnet test ./src/Sprachtml.tests/Sprachtml.tests.csproj
+  - cmd: dotnet test ./src/Sprachtml.Conventions.tests/Sprachtml.Conventions.tests.csproj
+on_finish :
+  # any cleanup in here
+deploy: 
+  provider: NuGet
+  api_key: 
+    secure: /Q93ZBRafD54aLZSbYP3NBl+Z/ivi55X1lPGS95wq7oMtuOYt65sl3S3cKU4OKW6
+  skip_symbols: true
+  artifact: /.*\.nupkg/
